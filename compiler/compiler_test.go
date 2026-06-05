@@ -20,25 +20,6 @@ type compilerTestCase struct {
 // Test cases ///
 // //////////////
 func TestIntegerArithmetic(t *testing.T) {
-	// TODO: Fix this
-	// $ go test ./compiler
-	// --- FAIL: TestIntegerArithmetic (0.00s)
-	// compiler_test.go:31: testInstructions failed: wrong instructions length.
-	// want="\x00\x00\x00\x00\x00\x01"
-	// got =""
-	// FAIL
-	// FAIL monkey/compiler 0.008s
-
-	// ❯ go test ./compiler
-	// --- FAIL: TestIntegerArithmetic (0.00s)
-	//
-	//	compiler_test.go:33: testInstructions failed: wrong instructions length.
-	//	    want=""
-	//	    got =""
-	//
-	// FAIL
-	// FAIL    monkey/compiler 0.142s
-	// FAIL
 	tests := []compilerTestCase{
 		{
 			input:             "1 + 2",
