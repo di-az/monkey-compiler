@@ -76,7 +76,6 @@ func (vm *VM) Run() error {
 			if err != nil {
 				return err
 			}
-
 		}
 
 	}
