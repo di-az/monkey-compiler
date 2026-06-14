@@ -34,6 +34,12 @@ func (c *Compiler) Compile(node ast.Node) error {
 			}
 		}
 
+	case *ast.IfExpression:
+		err := c.Compile(node.Condition)
+		if err != nil {
+			return err
+		}
+
 	case *ast.ExpressionStatement:
 		err := c.Compile(node.Expression)
 		if err != nil {
