@@ -51,14 +51,32 @@ func (vm *VM) Run() error {
 				return err
 			}
 
+		case code.OpPop:
+			vm.pop()
+
 		case code.OpAdd, code.OpSub, code.OpMul, code.OpDiv:
 			err := vm.executeBinaryOperation(op)
 			if err != nil {
 				return err
 			}
 
-		case code.OpPop:
-			vm.pop()
+		case code.OpEqual, code.OpNotEqual, code.OpGreaterThan:
+			err := vm.executeComparison(op)
+			if err != nil {
+				return err
+			}
+
+		case code.OpBang:
+			err := vm.executeBangOperator()
+			if err != nil {
+				return err
+			}
+
+		case code.OpMinus:
+			err := vm.executeMinusOperator()
+			if err != nil {
+				return err
+			}
 
 		case code.OpJump:
 			pos := int(code.ReadUint16(vm.instructions[ip+1:]))
@@ -87,24 +105,6 @@ func (vm *VM) Run() error {
 
 		case code.OpNull:
 			err := vm.push(Null)
-			if err != nil {
-				return err
-			}
-
-		case code.OpEqual, code.OpNotEqual, code.OpGreaterThan:
-			err := vm.executeComparison(op)
-			if err != nil {
-				return err
-			}
-
-		case code.OpBang:
-			err := vm.executeBangOperator()
-			if err != nil {
-				return err
-			}
-
-		case code.OpMinus:
-			err := vm.executeMinusOperator()
 			if err != nil {
 				return err
 			}
