@@ -11,22 +11,33 @@ type Instructions []byte
 type Opcode byte
 
 const (
+	// Constants
 	OpConstant Opcode = iota
-	OpAdd
 	OpPop
+
+	// Operators
+	OpAdd
 	OpSub
 	OpMul
 	OpDiv
+
+	// Boolean
 	OpTrue
 	OpFalse
+	OpNull
+
+	// Comparison
 	OpEqual
 	OpNotEqual
 	OpGreaterThan
+
+	// Unary
 	OpMinus
 	OpBang
+
+	// Conditionals
 	OpJump
 	OpJumpNotTruthy
-	OpNull
 )
 
 type Definition struct {
