@@ -15,6 +15,10 @@ const (
 	OpConstant Opcode = iota
 	OpPop
 
+	// Variables
+	OpSetGlobal
+	OpGetGlobal
+
 	// Operators
 	OpAdd
 	OpSub
@@ -49,6 +53,10 @@ var definitions = map[Opcode]*Definition{
 	// Constants
 	OpConstant: {"OpConstant", []int{2}},
 	OpPop:      {"OpPop", []int{}},
+
+	// Variables
+	OpSetGlobal: {"OpSetGlobal", []int{2}},
+	OpGetGlobal: {"OpGetGlobal", []int{2}},
 
 	// Operators
 	OpAdd: {"OpAdd", []int{}},
