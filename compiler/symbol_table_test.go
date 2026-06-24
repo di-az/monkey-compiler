@@ -20,7 +20,7 @@ func TestDefine(t *testing.T) {
 	}
 }
 
-func TestGlobal(t *testing.T) {
+func TestResolveGlobal(t *testing.T) {
 	global := NewSymbolTable()
 	global.Define("a")
 	global.Define("b")
