@@ -335,7 +335,7 @@ func concatInstructions(s []code.Instructions) code.Instructions {
 }
 
 func testConstants(
-	t *testing.T,
+	_ *testing.T,
 	expected []interface{},
 	actual []object.Object,
 ) error {
