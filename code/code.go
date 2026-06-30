@@ -18,6 +18,7 @@ const (
 	// Variables
 	OpSetGlobal
 	OpGetGlobal
+	OpArray
 
 	// Operators
 	OpAdd
@@ -57,6 +58,7 @@ var definitions = map[Opcode]*Definition{
 	// Variables
 	OpSetGlobal: {"OpSetGlobal", []int{2}},
 	OpGetGlobal: {"OpGetGlobal", []int{2}},
+	OpArray:     {"OpArray", []int{2}},
 
 	// Operators
 	OpAdd: {"OpAdd", []int{}},
