@@ -180,10 +180,13 @@ func testExpectedObject(
 		array, ok := actual.(*object.Array)
 		if !ok {
 			t.Errorf("object not Array: %T (%+v)", actual, actual)
+			return
 		}
 
 		if len(array.Elements) != len(expected) {
 			t.Errorf("wrong num of elements. want=%d, got=%d", len(expected), len(array.Elements))
+			return
+		}
 		}
 
 		for i, expexpectedElem := range expected {
