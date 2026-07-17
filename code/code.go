@@ -25,6 +25,7 @@ const (
 	OpIndex
 	OpCall
 	OpReturnValue
+	OpReturn
 
 	// Operators
 	OpAdd
@@ -71,6 +72,7 @@ var definitions = map[Opcode]*Definition{
 	OpIndex:       {"OpIndex", []int{}},
 	OpCall:        {"OpCall", []int{}},
 	OpReturnValue: {"OpReturnValue", []int{}},
+	OpReturn:      {"OpReturn", []int{}},
 
 	// Operators
 	OpAdd: {"OpAdd", []int{}},
