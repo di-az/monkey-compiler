@@ -179,30 +179,6 @@ func TestConditionals(t *testing.T) {
 	tests := []compilerTestCase{
 		{
 			input: `
-			if (true) { 10 } else { 20 }; 3333;
-			`,
-			expectedConstants: []interface{}{10, 3333},
-			expectedInstructions: []code.Instructions{
-				// 0000
-				code.Make(code.OpTrue),
-				// 0001
-				code.Make(code.OpJumpNotTruthy, 10),
-				// 0004
-				code.Make(code.OpConstant, 0),
-				// 0007
-				code.Make(code.OpJump, 13),
-				// 0010
-				code.Make(code.OpConstant, 1),
-				// 0013
-				code.Make(code.OpPop),
-				// 0014
-				code.Make(code.OpConstant, 2),
-				// 0017
-				code.Make(code.OpPop),
-			},
-		},
-		{
-			input: `
 			if (true) { 10 }; 3333;
 			`,
 			expectedConstants: []interface{}{10, 3333},
@@ -225,8 +201,31 @@ func TestConditionals(t *testing.T) {
 				code.Make(code.OpPop),
 			},
 		},
+		{
+			input: `
+			if (true) { 10 } else { 20 }; 3333;
+			`,
+			expectedConstants: []interface{}{10, 20, 3333},
+			expectedInstructions: []code.Instructions{
+				// 0000
+				code.Make(code.OpTrue),
+				// 0001
+				code.Make(code.OpJumpNotTruthy, 10),
+				// 0004
+				code.Make(code.OpConstant, 0),
+				// 0007
+				code.Make(code.OpJump, 13),
+				// 0010
+				code.Make(code.OpConstant, 1),
+				// 0013
+				code.Make(code.OpPop),
+				// 0014
+				code.Make(code.OpConstant, 2),
+				// 0017
+				code.Make(code.OpPop),
+			},
+		},
 	}
-
 	runCompilerTests(t, tests)
 }
 
@@ -591,8 +590,10 @@ func TestFunctionCalls(t *testing.T) {
 // ///////////////////
 func runCompilerTests(t *testing.T, tests []compilerTestCase) {
 	t.Helper()
+
 	for _, tt := range tests {
 		program := parse(tt.input)
+
 		compiler := New()
 		err := compiler.Compile(program)
 		if err != nil {
@@ -600,14 +601,15 @@ func runCompilerTests(t *testing.T, tests []compilerTestCase) {
 		}
 
 		bytecode := compiler.Bytecode()
-		err = testInstructions(tt.expectedInstructions, bytecode.Instructions)
 
+		err = testInstructions(tt.expectedInstructions, bytecode.Instructions)
 		if err != nil {
 			t.Fatalf("testInstructions failed: %s", err)
-			err = testConstants(t, tt.expectedConstants, bytecode.Constants)
-			if err != nil {
-				t.Fatalf("testConstants failed: %s", err)
-			}
+		}
+
+		err = testConstants(t, tt.expectedConstants, bytecode.Constants)
+		if err != nil {
+			t.Fatalf("testConstants failed: %s", err)
 		}
 	}
 }
@@ -681,8 +683,10 @@ func testConstants(
 			if err != nil {
 				return fmt.Errorf("constant %d - testInstructions failed: %s",
 					i, err)
-
 			}
+
+		default:
+			return fmt.Errorf("unsupported constant type: %T", constant)
 		}
 	}
 	return nil
