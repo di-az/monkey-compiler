@@ -285,8 +285,8 @@ func TestCallingFunctionsWithBindings(t *testing.T) {
 			let minusTwo = fn() {
 				let num = 2;
 				globalSeed - num;
-			minusOne() + minusTwo();
 			}
+			minusOne() + minusTwo();
 			`,
 			expected: 97,
 		},
