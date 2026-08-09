@@ -20,6 +20,7 @@ const (
 	OpGetGlobal
 	OpSetLocal
 	OpGetLocal
+	OpGetBuiltin
 	OpArray
 	OpHash
 
@@ -65,12 +66,13 @@ var definitions = map[Opcode]*Definition{
 	OpPop:      {"OpPop", []int{}},
 
 	// Variables
-	OpSetGlobal: {"OpSetGlobal", []int{2}},
-	OpGetGlobal: {"OpGetGlobal", []int{2}},
-	OpSetLocal:  {"OpSetLocal", []int{1}},
-	OpGetLocal:  {"OpGetLocal", []int{1}},
-	OpArray:     {"OpArray", []int{2}},
-	OpHash:      {"OpHash", []int{2}},
+	OpSetGlobal:  {"OpSetGlobal", []int{2}},
+	OpGetGlobal:  {"OpGetGlobal", []int{2}},
+	OpSetLocal:   {"OpSetLocal", []int{1}},
+	OpGetLocal:   {"OpGetLocal", []int{1}},
+	OpGetBuiltin: {"OpGetBuiltin", []int{1}},
+	OpArray:      {"OpArray", []int{2}},
+	OpHash:       {"OpHash", []int{2}},
 
 	// Access
 	OpIndex:       {"OpIndex", []int{}},
