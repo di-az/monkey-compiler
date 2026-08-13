@@ -202,6 +202,6 @@ type Closure struct {
 }
 
 func (c *Closure) Type() ObjectType { return CLOSURE_OBJ }
-func (c *Closure) String() string {
+func (c *Closure) Inspect() string {
 	return fmt.Sprintf("Closure[%p]", c)
 }
