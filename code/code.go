@@ -23,7 +23,10 @@ const (
 	OpGetBuiltin
 	OpArray
 	OpHash
+
+	// Closures
 	OpClosure
+	OpGetFree
 
 	// Access
 	OpIndex
@@ -74,7 +77,10 @@ var definitions = map[Opcode]*Definition{
 	OpGetBuiltin: {"OpGetBuiltin", []int{1}},
 	OpArray:      {"OpArray", []int{2}},
 	OpHash:       {"OpHash", []int{2}},
-	OpClosure:    {"OpClosure", []int{2, 1}},
+
+	// Closures
+	OpClosure: {"OpClosure", []int{2, 1}},
+	OpGetFree: {"OpGetFree", []int{1}},
 
 	// Access
 	OpIndex:       {"OpIndex", []int{}},
