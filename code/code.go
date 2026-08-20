@@ -27,6 +27,7 @@ const (
 	// Closures
 	OpClosure
 	OpGetFree
+	OpCurrentClosure
 
 	// Access
 	OpIndex
@@ -79,8 +80,9 @@ var definitions = map[Opcode]*Definition{
 	OpHash:       {"OpHash", []int{2}},
 
 	// Closures
-	OpClosure: {"OpClosure", []int{2, 1}},
-	OpGetFree: {"OpGetFree", []int{1}},
+	OpClosure:        {"OpClosure", []int{2, 1}},
+	OpGetFree:        {"OpGetFree", []int{1}},
+	OpCurrentClosure: {"OpCurrentClosure", []int{}},
 
 	// Access
 	OpIndex:       {"OpIndex", []int{}},
